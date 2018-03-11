@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
+	<!-- 1 .启用注解式IOC -->
+	<context:annotation-config />
+	<context:component-scan base-package="com.byxy" />
+	<!-- 2. 加载配置文件 -->
+	<context:property-placeholder
+		ignore-unresolvable="true" location="classpath:jdbc.properties" />
+	<!-- 3. 数据库连接池c3p0配置 -->
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
+		destroy-method="close">
+		<property name="jdbcUrl" value="${jdbc.url}"></property>
+		<property name="driverClass" value="${jdbc.driver}"></property>
+		<property name="user" value="${jdbc.username}"></property>
+		<property name="password" value="${jdbc.password}"></property>
+	</bean>
+	<!-- 4. Hibernate配置 -->
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<!-- 自动扫描注解方式配置的实体类文件 -->
+		<property name="packagesToScan">
+			<list>
+				<value>com.byxy.entity</value>
+			</list>
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">${jdbc.database.Dialect}</prop>
+				<prop key="show_sql">true</prop>
+				<prop key="hibernate.temp.use_jdbc_metadata_defaults">false</prop>
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
+				<prop key="hiberante.format_sql">true</prop>
+			</props>
+		</property>
+	</bean>
+	<!-- 5. 事务管理器 -->
+	<bean id="txManager"
+		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<!-- 注解式事务 声明式事务选其一 -->
+	<!-- 6. 启用注解式事务 -->
+	<tx:annotation-driven transaction-manager="txManager" />
+	<!-- 6. 启用声明式事务 -->
+	<!-- <tx:advice id="txAdvice" transaction-manager="txManager"> <tx:attributes> 
+		<tx:method name="add*" propagation="REQUIRED" /> <tx:method name="delete*" 
+		propagation="REQUIRED" /> <tx:method name="update*" propagation="REQUIRED" 
+		/> <tx:method name="count*" propagation="REQUIRED" read-only="true" /> <tx:method 
+		name="find*" propagation="REQUIRED" read-only="true" /> <tx:method name="*" 
+		propagation="REQUIRED" read-only="true" /> </tx:attributes> </tx:advice> 
+		<aop:config> <aop:pointcut id="serviceOperation" expression="execution(* 
+		com.byxy.service..*.*(..))" /> <aop:advisor advice-ref="txAdvice" pointcut-ref="serviceOperation" 
+		/> </aop:config> -->
+		
+	<aop:aspectj-autoproxy proxy-target-class="true"/>
+</beans>
