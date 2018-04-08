@@ -21,7 +21,9 @@
 	            
 	            <div class="m-t-40 card-box">
 	            	<div class="text-center">
+	            		<% %>
 	                    <h4 class="text-uppercase font-bold m-b-0">注册</h4>
+	                    <h4 class="text-uppercase font-bold m-b-0">${sessionScope.error}</h4>
 	                </div>
 	                <div class="panel-body">
 	                	<form class="am-form" method="post" action="zc">

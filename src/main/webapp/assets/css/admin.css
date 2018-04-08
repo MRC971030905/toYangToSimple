@@ -4,7 +4,7 @@
 
 
 /*
- fixed-layout 固定头部和边栏布局
+ fixed-layout 鍥哄畾澶撮儴鍜岃竟鏍忓竷灞�
 */
 
 html,
@@ -53,7 +53,6 @@ ul {
   width: 260px;
   min-height: 100%;
   float: left;
-  border-right: 1px solid #cecece;
 }
 
 .admin-sidebar.am-active {
@@ -105,8 +104,6 @@ ul {
 .admin-content,
 .admin-sidebar {
   height: 100%;
-  overflow-x: hidden;
-  overflow-y: scroll;
   -webkit-overflow-scrolling: touch;
 }
 

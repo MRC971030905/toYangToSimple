@@ -5,60 +5,68 @@
 <struts>
 	<package name="default" namespace="/" extends="json-default">
 		<!--拦截器 -->
-	 	<interceptors>
-			<interceptor name="loginInterceptor" class="com.byxy.filter.LoginInterceptor" />
-			
+		<interceptors>
+			<interceptor name="loginInterceptor"
+				class="com.byxy.filter.LoginInterceptor" />
+
 			<!-- 拦截器栈 -->
 			<interceptor-stack name="teamwareStack">
 				<interceptor-ref name="loginInterceptor" />
 
-				<interceptor-ref name="defaultStack"/>
+				<interceptor-ref name="defaultStack" />
 			</interceptor-stack>
 		</interceptors>
-	
+
 		<default-interceptor-ref name="teamwareStack"></default-interceptor-ref>
-		
-		<default-action-ref name="login"/>
-		
+
+		<default-action-ref name="login" />
+
 		<global-results>
 			<result name="error">login.jsp</result>
 		</global-results>
-	
-		<action name="getWeather" class="com.byxy.action.DormitoryAction" method="getWeather">  
-            <result type="json">  
-                <param name="root">jsonData</param>     <!-- 这里的jsonData对应action里要返回的map对象 -->  
-            </result>  
-        </action> 
-        
-		
-		<action name="list" class="com.byxy.action.DormitoryAction" method="list">
+
+		<action name="getWeather"
+			class="com.byxy.action.DormitoryAction" method="getWeather">
+			<result type="json">
+				<param name="root">jsonData</param><!-- 这里的jsonData对应action里要返回的map对象 -->
+			</result>
+		</action>
+
+
+		<action name="list" class="com.byxy.action.DormitoryAction"
+			method="list">
 			<result name="OK"> html/table_complete.jsp</result>
 		</action>
-		<action name="update" class="com.byxy.action.DormitoryAction" method="update">
+		<action name="update" class="com.byxy.action.DormitoryAction"
+			method="update">
 			<result name="NO"> html/table_completeUpdate.jsp</result>
 			<result name="OK" type="redirectAction">list</result>
 		</action>
-		<action name="add" class="com.byxy.action.DormitoryAction" method="add">
+		<action name="add" class="com.byxy.action.DormitoryAction"
+			method="add">
 			<result name="OK" type="redirectAction">list</result>
-			<result name="NO" > html/table_completeAdd.jsp</result>
+			<result name="NO"> html/table_completeAdd.jsp</result>
 		</action>
-		
-		<action name="delete" class="com.byxy.action.DormitoryAction" method="dele">
+
+		<action name="delete" class="com.byxy.action.DormitoryAction"
+			method="dele">
 			<result name="OK" type="redirectAction">list</result>
 		</action>
-		<action name="zc" class="com.byxy.action.MrcUserZCAction" method="zc">
-			<result name="OK" > login.jsp</result>
-			<result name="NO" > signIn.jsp</result>
+		<action name="zc" class="com.byxy.action.MrcUserZCAction"
+			method="zc">
+			<result> login.jsp</result>
+			<result name="error"> signIn.jsp</result>
 		</action>
-		<action name="login" class="com.byxy.action.MrcUserLoginAction" method="login">
-			<result name="OK" >index.jsp</result>
-			<result name="error" >login.jsp</result>
+		<action name="login" class="com.byxy.action.MrcUserLoginAction"
+			method="login">
+			<result name="success">WEB-INF/index.jsp</result>
+			<result name="error">login.jsp</result>
 		</action>
 		<action name="index">
-			<result >index.jsp</result>
-			
+			<result>WEB-INF/index.jsp</result>
 		</action>
-		
+
 	</package>
-	<constant name="struts.objectFactory.spring.autoWire.alwaysRespect" value="true"/>
+	<constant
+		name="struts.objectFactory.spring.autoWire.alwaysRespect" value="true" />
 </struts>

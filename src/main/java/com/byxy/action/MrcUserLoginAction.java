@@ -10,55 +10,58 @@ import com.byxy.service.MrcUserService;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class MrcUserLoginAction extends ActionSupport {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Resource
 	private MrcUserService ms;
-	
+
 	private MrcUser mu;
 
 	public String login() {
-		
-		if(null==mu){
+		if (null == mu) {// 判断是否有数据
 			return "error";
-		}else{
-			if(mu.getUsername().equals(null)||mu.getUsername()==""||mu.getPassword().equals(null)||mu.getPassword()==""){
-				
+		} else {
+			if (mu.getUsername().equals(null) || mu.getUsername() == "" || mu.getPassword().equals(null)
+					|| mu.getPassword() == "") {// 判断用户名和密码是否有空的
+				ServletActionContext.getRequest().getSession().setAttribute("error", "请输入账号或密码");
 				return "error";
-			}else{
-				MrcUser m=new MrcUser();
-			
-				m=ms.getUser(mu.getUsername());
-				System.out.println(mu.getUsername());
-				System.out.println(mu.getPassword());
-				if(null==m){
+			} else {
+				MrcUser m = new MrcUser();
+				m = ms.getUser(mu.getUsername());// 查询数据库
+				if (null == m) {// 用户不存在
 					return "error";
-				}else{
-					if(mu.getPassword().equals(m.getPassword())){
-						HttpSession session=ServletActionContext.getRequest().getSession();
-						session.setAttribute("mu", m);
-						System.out.println(m);
-						System.out.println("OK");
-						return "OK";
-					}else{
+				} else {
+					if (mu.getPassword().equals(m.getPassword())) {
+						ServletActionContext.getRequest().getSession().setAttribute("mu", m);
+						return "success";
+					} else {
+						ServletActionContext.getRequest().getSession().setAttribute("error", "用户或密码不正确");
 						return "error";
 					}
 				}
-						
+
 			}
 		}
-		
+
 	}
+
 	public MrcUserService getMs() {
 		return ms;
 	}
+
 	public void setMs(MrcUserService ms) {
 		this.ms = ms;
 	}
+
 	public MrcUser getMu() {
 		return mu;
 	}
+
 	public void setMu(MrcUser mu) {
 		this.mu = mu;
 	}
-	
-	
+
 }
