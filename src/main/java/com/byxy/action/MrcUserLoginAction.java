@@ -1,12 +1,15 @@
 package com.byxy.action;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.struts2.ServletActionContext;
 
 import com.byxy.entity.MrcUser;
+import com.byxy.entity.Student;
 import com.byxy.service.MrcUserService;
+import com.byxy.service.StudentService;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class MrcUserLoginAction extends ActionSupport {
@@ -18,6 +21,8 @@ public class MrcUserLoginAction extends ActionSupport {
 	@Resource
 	private MrcUserService ms;
 
+	@Resource
+	private StudentService ss;
 	private MrcUser mu;
 
 	public String login() {
@@ -30,20 +35,38 @@ public class MrcUserLoginAction extends ActionSupport {
 				return "error";
 			} else {
 				MrcUser m = new MrcUser();
-				m = ms.getUser(mu.getUsername());// 查询数据库
-				if (null == m) {// 用户不存在
+				Student s = new Student();
+				s = ss.getUser(mu.getUsername());// 查询数据库(普通用户)
+				m = ms.getUser(mu.getUsername());// 查询数据库(管理员)
+				System.out.println(s + "这个普通用户");
+				System.out.println(m + "这是管理员");
+				if (null == s && null == m) {// 用户不存在
 					return "error";
 				} else {
-					if (mu.getPassword().equals(m.getPassword())) {
-						ServletActionContext.getRequest().getSession().setAttribute("mu", m);
-						return "success";
+					if (null == s && null != m) {// 用户是管理员
+						if (m.getPassword().equals(mu.getPassword())) {
+							System.out.println("管理员登录");
+							ServletActionContext.getRequest().getSession().setAttribute("mu", m);
+							ServletActionContext.getRequest().getSession().setAttribute("name", m.getUsername());
+							return "admin";
+						} else {
+							return "error";
+						}
+
 					} else {
-						ServletActionContext.getRequest().getSession().setAttribute("error", "用户或密码不正确");
-						return "error";
+						if (mu.getPassword().equals(s.getPassword())) {
+							ServletActionContext.getRequest().getSession().setAttribute("mu", mu);
+							ServletActionContext.getRequest().getSession().setAttribute("name", s.getName());
+							return "success";
+						} else {
+							ServletActionContext.getRequest().getSession().setAttribute("error", "用户或密码不正确");
+							return "error";
+						}
 					}
 				}
 
 			}
+
 		}
 
 	}

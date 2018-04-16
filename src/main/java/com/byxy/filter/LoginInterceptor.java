@@ -13,7 +13,7 @@ public class LoginInterceptor extends  AbstractInterceptor {
 	public String intercept(ActionInvocation arg0) throws Exception {
 		String actionName = arg0.getProxy().getActionName();
 		System.out.println("actionName="+actionName);
-		if ("login".equals(actionName)||"zc".equals(actionName)||"getWeather".equals(actionName)) {
+		if ("login".equals(actionName)||"studentZC".equals(actionName)||"getWeather".equals(actionName)) {
 			return arg0.invoke();	
 		} else {
 			Map session = arg0.getInvocationContext().getSession();

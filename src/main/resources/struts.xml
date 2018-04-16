@@ -52,18 +52,23 @@
 			method="dele">
 			<result name="OK" type="redirectAction">list</result>
 		</action>
-		<action name="zc" class="com.byxy.action.MrcUserZCAction"
-			method="zc">
+		<action name="studentZC"
+			class="com.byxy.action.StudentZCAction" method="studentZC">
 			<result> login.jsp</result>
-			<result name="error"> signIn.jsp</result>
+			<result name="error">studentSignIn.jsp</result>
+
 		</action>
 		<action name="login" class="com.byxy.action.MrcUserLoginAction"
 			method="login">
-			<result name="success">WEB-INF/index.jsp</result>
+			<result>WEB-INF/studentIndex.jsp</result>
 			<result name="error">login.jsp</result>
+			<result name="admin">WEB-INF/index.jsp</result>
 		</action>
 		<action name="index">
 			<result>WEB-INF/index.jsp</result>
+		</action>
+		<action name="sindex">
+			<result>WEB-INF/studentIndex.jsp</result>
 		</action>
 
 	</package>

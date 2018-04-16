@@ -21,7 +21,7 @@
 	<div class="account-pages">
 		<div class="wrapper-page">
 			<div class="text-center">
-				<a href="index.html" class="logo">宿舍管理系统</a>
+				<a href="index.jsp" class="logo">宿舍管理系统</a>
 			</div>
 
 			<div class="m-t-40 card-box">
@@ -52,7 +52,7 @@
 							</div>
 
 							<div class="am-form-group ">
-								<a href="signIn.jsp">
+								<a href="studentSignIn.jsp">
 									<button type="button" class="am-btn am-btn-primary am-radius"
 										style="width: 100%; height: 100%;">注册</button>
 								</a>

@@ -35,44 +35,34 @@
 							<i class="am-icon-dot-circle-o" aria-hidden="true"></i>
 						</div>
 					</div>
-					<div name="${mu.username}">${mu.username }</div>
+					<h5>${mu.username }</h5>
 				</div>
-				<!-- End User -->
-
 				<ul class="am-list admin-sidebar-list">
-					<li><a href="index"><span class="am-icon-home"></span> 首页</a></li>
+					<li><a href="sindex"><span class="am-icon-home"></span> 首页</a></li>
 					<li class="admin-parent"><a class="am-cf"
 						data-am-collapse="{target: '#collapse-nav1'}"><span
-							class="am-icon-table"></span> 学生信息 <span
+							class="am-icon-table"></span> 功能模块 <span
 							class="am-icon-angle-right am-fr am-margin-right"></span></a>
 						<ul class="am-list am-collapse admin-sidebar-sub"
 							id="collapse-nav1">
-							<li><a href="list">学生信息</a></li>
+							<li><a href="sindex">天气查询</a></li>
+							<li><a href="chatRoom2.jsp">吐槽室</a></li>
+							<li><a href="html/location.html">定位</a></li>
 						</ul></li>
-					<li class="admin-parent"><a class="am-cf"
-						data-am-collapse="{target: '#collapse-nav2'}"><i
-							class="am-icon-line-chart" aria-hidden="true"></i> 统计图表 <span
-							class="am-icon-angle-right am-fr am-margin-right"></span></a>
-						<ul class="am-list am-collapse admin-sidebar-sub"
-							id="collapse-nav2">
-							<li><a href="html/chart_line.html" class="am-cf"> 折线图</a></li>
-							<li><a href="html/chart_columnar.html" class="am-cf">
-									柱状图 </a></li>
-							<li><a href="html/chart_pie.html" class="am-cf"> 饼状图</a></li>
-						</ul></li>
-					<li class="admin-parent"><a class="am-cf"
-						data-am-collapse="{target: '#collapse-nav5'}"><span
-							class="am-icon-file"></span> 表单 <span
-							class="am-icon-angle-right am-fr am-margin-right"></span></a>
-						<ul class="am-list am-collapse admin-sidebar-sub"
-							id="collapse-nav5">
-							<li><a href="html/form_basic.html" class="am-cf"> 基本表单</a></li>
-							<li><a href="html/form_validate.html">表单验证</a></li>
-						</ul></li>
+					
+					
 				</ul>
 			</div>
+
 		</div>
 		<!-- sidebar end -->
+
+		<!--</div>
+			</div>
+		</div>-->
+		<!-- ========== Left Sidebar end ========== -->
+
+
 
 		<!--	<div class="am-g">-->
 		<!-- ============================================================== -->
@@ -95,16 +85,9 @@
 							<h4 class="header-title m-t-0 m-b-30">吐槽板块</h4>
 							<div class="widget-box-2">
 								<div class="widget-detail-2">
-									<a href="chatRoom2.jsp">进入聊天室</a> <span
-										class="badge  pull-left m-t-20  am-round"
-										style="color: #fff; background: #0e90d2;">3% <i
-										class="zmdi zmdi-trending-up"></i>
-									</span>
-									<h5 class="m-b-0">新信息： 3 条</h5>
+									<a class="badge  pull-left m-t-20  am-round"
+										style="color: #fff; background: #0e90d2;" href="chatRoom2.jsp">进入吐槽室</a>
 
-								</div>
-								<div class="am-progress am-progress-xs am-margin-bottom-0">
-									<div class="am-progress-bar" style="width: 80%"></div>
 								</div>
 							</div>
 						</div>
@@ -114,7 +97,9 @@
 						<div class="card-box">
 							<h4 class="header-title m-t-0 m-b-30">定位</h4>
 							<div class="widget-chart-1 am-cf">
-								<a href="html/location.html">单击定位</a>
+								<a class="badge  pull-left m-t-20  am-round"
+									style="color: #fff; background: #0e90d2;"
+									href="html/location.html">单击定位</a>
 							</div>
 						</div>
 					</div>
@@ -162,12 +147,26 @@
 					</div>
 					<!-- Row end -->
 				</div>
+
+
+
+
+
+
 			</div>
+
+
+
+
 
 		</div>
 	</div>
 	<!-- end right Content here -->
+	<!--</div>-->
+	</div>
+	</div>
 
+	<!-- navbar -->
 	<a href="admin-offcanvas"
 		class="am-icon-btn am-icon-th-list am-show-sm-only admin-menu"
 		data-am-offcanvas="{target: '#admin-offcanvas'}"> <!--<i class="fa fa-bars" aria-hidden="true"></i>-->
