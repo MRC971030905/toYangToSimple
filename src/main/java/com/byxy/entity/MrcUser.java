@@ -1,12 +1,14 @@
 package com.byxy.entity;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
-public class MrcUser {//ÓÃ»§×¢²á
+public class MrcUser implements Serializable{//ï¿½Ã»ï¿½×¢ï¿½ï¿½
 	
 	@GeneratedValue
 	private int id;

@@ -12,7 +12,6 @@
 			<!-- 拦截器栈 -->
 			<interceptor-stack name="teamwareStack">
 				<interceptor-ref name="loginInterceptor" />
-
 				<interceptor-ref name="defaultStack" />
 			</interceptor-stack>
 		</interceptors>
@@ -25,40 +24,39 @@
 			<result name="error">login.jsp</result>
 		</global-results>
 
-		<action name="getWeather"
-			class="com.byxy.action.DormitoryAction" method="getWeather">
+		<action name="getWeather" class="com.byxy.action.LoginAction"
+			method="getWeather">
 			<result type="json">
 				<param name="root">jsonData</param><!-- 这里的jsonData对应action里要返回的map对象 -->
 			</result>
 		</action>
 
-
-		<action name="list" class="com.byxy.action.DormitoryAction"
+		<action name="list" class="com.byxy.action.StudentAction"
 			method="list">
-			<result name="OK"> html/table_complete.jsp</result>
+			<result name="success"> html/table_complete.jsp</result>
 		</action>
-		<action name="update" class="com.byxy.action.DormitoryAction"
+		<action name="update" class="com.byxy.action.StudentAction"
 			method="update">
-			<result name="NO"> html/table_completeUpdate.jsp</result>
-			<result name="OK" type="redirectAction">list</result>
+			<result name="error"> html/table_completeUpdate.jsp</result>
+			<result type="redirectAction">list</result>
 		</action>
-		<action name="add" class="com.byxy.action.DormitoryAction"
+		<action name="add" class="com.byxy.action.StudentAction"
 			method="add">
-			<result name="OK" type="redirectAction">list</result>
-			<result name="NO"> html/table_completeAdd.jsp</result>
+			<result name="success" type="redirectAction">list</result>
+			<result name="error"> html/table_completeAdd.jsp</result>
 		</action>
 
-		<action name="delete" class="com.byxy.action.DormitoryAction"
+		<action name="delete" class="com.byxy.action.StudentAction"
 			method="dele">
-			<result name="OK" type="redirectAction">list</result>
+			<result name="success" type="redirectAction">list</result>
 		</action>
 		<action name="studentZC"
 			class="com.byxy.action.StudentZCAction" method="studentZC">
-			<result> login.jsp</result>
+			<result name="success"> login.jsp</result>
 			<result name="error">studentSignIn.jsp</result>
 
 		</action>
-		<action name="login" class="com.byxy.action.MrcUserLoginAction"
+		<action name="login" class="com.byxy.action.LoginAction"
 			method="login">
 			<result>WEB-INF/studentIndex.jsp</result>
 			<result name="error">login.jsp</result>
@@ -70,7 +68,9 @@
 		<action name="sindex">
 			<result>WEB-INF/studentIndex.jsp</result>
 		</action>
-
+		<action name="chatRoom">
+			<result>WEB-INF/chatRoom.jsp</result>
+		</action>
 	</package>
 	<constant
 		name="struts.objectFactory.spring.autoWire.alwaysRespect" value="true" />

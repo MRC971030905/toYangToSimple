@@ -5,6 +5,7 @@ import java.util.Date;
 
 import javax.annotation.Resource;
 
+import org.apache.struts2.ServletActionContext;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.Around;
@@ -15,25 +16,28 @@ import org.springframework.stereotype.Component;
 
 import com.byxy.entity.Log;
 import com.byxy.service.LogService;
+import com.opensymphony.xwork2.ActionContext;
 
-@Aspect        // 1 ÉùÃ÷ÇĞÃæ
-@Component  // 2.×¢²áÎªBean
+@Aspect // 1 å£°æ˜åˆ‡é¢
+@Component // 2.æ³¨å†Œä¸ºBean
 public class LogAop {
 	@Resource
 	private LogService logService;
-	@Pointcut("execution(* com.byxy.action.*.*(..))") // 3. ÉùÃ÷ÇĞÃæ
-	public void actionTime(){
-	};	
+
+	@Pointcut("execution(* com.byxy.action.*.*(..))") // 3. å£°æ˜åˆ‡é¢
+	public void actionTime() {
+	};
+
 	@Around("actionTime()")
-	public Object log(ProceedingJoinPoint pjp) throws Throwable{
-		long start =System.currentTimeMillis();
-		Log log=new Log();
-		Object target = pjp.getTarget();//ÀàµÄÃû×Ö
+	public Object log(ProceedingJoinPoint pjp) throws Throwable {
+		long start = System.currentTimeMillis();
+		Log log = new Log();
+		Object target = pjp.getTarget();// ç±»çš„åå­—
 		Signature sig = pjp.getSignature();
 		MethodSignature msig = null;
-		String name=pjp.getSignature().getName();
+		String name = pjp.getSignature().getName();
 		if (!(sig instanceof MethodSignature)) {
-			throw new IllegalArgumentException("¸Ã×¢½âÖ»ÄÜÓÃÓÚ·½·¨");
+			throw new IllegalArgumentException("è¯¥æ³¨è§£åªèƒ½ç”¨äºæ–¹æ³•");
 		}
 		msig = (MethodSignature) sig;
 		Class[] parameterTypes = msig.getMethod().getParameterTypes();
@@ -46,25 +50,28 @@ public class LogAop {
 			e1.printStackTrace();
 		}
 		if (null != method) {
-			// ÅĞ¶ÏÊÇ·ñ°üº¬×Ô¶¨ÒåµÄ×¢½â£¬ËµÃ÷Ò»ÏÂÕâÀïµÄSystemLog¾ÍÊÇÎÒ×Ô¼º×Ô¶¨ÒåµÄ×¢½â
+			// åˆ¤æ–­æ˜¯å¦åŒ…å«è‡ªå®šä¹‰çš„æ³¨è§£ï¼Œè¯´æ˜ä¸€ä¸‹è¿™é‡Œçš„SystemLogå°±æ˜¯æˆ‘è‡ªå·±è‡ªå®šä¹‰çš„æ³¨è§£
 			if (method.isAnnotationPresent(LogAnn.class)) {
 				LogAnn systemlog = method.getAnnotation(LogAnn.class);
 				log.setModel(systemlog.module() + "-" + systemlog.methods());
 			}
 		}
-		Object object =	pjp.proceed();
-		long end=System.currentTimeMillis();
+		Object object = pjp.proceed();
+		long end = System.currentTimeMillis();
 		log.setName(name);
-		log.setBeginDate(new Date());	
-		log.setNtime(end-start);
+		log.setBeginDate(new Date());
+		log.setNtime(end - start);
+		ServletActionContext.getRequest().getSession().setAttribute("log",log);
 		logService.add(log);
 		return object;
 	}
+
 	public LogService getLogService() {
 		return logService;
 	}
+
 	public void setLogService(LogService logService) {
 		this.logService = logService;
 	}
-	
+
 }

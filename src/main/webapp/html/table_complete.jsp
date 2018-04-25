@@ -25,7 +25,7 @@
 	href="${pageContext.request.contextPath}/assets/css/page/form.css" />
 </head>
 <body>
-	
+
 
 
 	<div class="admin">
@@ -47,7 +47,7 @@
 							<i class="am-icon-dot-circle-o" aria-hidden="true"></i>
 						</div>
 					</div>
-					<h5>${mu.username }</h5>
+					<h5></h5>
 				</div>
 				<!-- End User -->
 
@@ -108,15 +108,6 @@
 									<button type="button" class="am-btn am-btn-default">
 										<span class="am-icon-plus"></span><a href="add">新增</a>
 									</button>
-									<button type="button" class="am-btn am-btn-default">
-										<span class="am-icon-save"></span> 保存
-									</button>
-									<button type="button" class="am-btn am-btn-default">
-										<span class="am-icon-archive"></span> 审核
-									</button>
-									<button type="button" class="am-btn am-btn-default">
-										<span class="am-icon-trash-o"></span> 删除
-									</button>
 								</div>
 							</div>
 						</div>
@@ -135,51 +126,45 @@
 					<!-- Row start -->
 					<div class="am-g">
 						<div class="am-u-sm-12">
-							<form class="am-form">
+							<form action="update" method="post" class="am-form">
 								<table
 									class="am-table am-table-striped am-table-hover table-main">
 									<thead>
 										<tr>
-											<th class="table-id">ID</th>
-											<th class="table-title">姓名</th>
-											<th class="table-type">系级</th>
-											<th class="table-author am-hide-sm-only">班级</th>
-											<th class="table-date am-hide-sm-only">联系方式</th>
-											<th class="table-set">qq</th>
-											<th class="table-set">微信</th>
-											<th class="table-set">所在区域</th>
-											<th class="table-set">所在宿舍</th>
-											<th class="table-set">身高</th>
-											<th class="table-set">体重</th>
-											<th class="table-set">操作</th>
+											<th>ID</th>
+											<th>用户名</th>
+											<th>昵称</th>
+											<th>密码</th>
+											<th>年龄</th>
+											<th>楼层</th>
+											<th>宿舍</th>
+											<th>性别</th>
+											<th>操作</th>
 										</tr>
 									</thead>
 									<tbody>
-										<c:forEach var="d" items="${list}">
+										<c:forEach var="stu" items="${list}">
 											<tr>
-												<td>${d.dId }</td>
-												<td>${d.name}</td>
-												<td>${d.departmentName}</td>
-												<td>${d.className}</td>
-												<td>${d.phone}</td>
-												<td>${d.tim}</td>
-												<td>${d.weChat}</td>
-												<td>${d.area}</td>
-												<td>${d.dormitory}</td>
-												<td>${d.height}</td>
-												<td>${d.weight}</td>
+												<td>${stu.id }</td>
+												<td>${stu.name}</td>
+												<td>${stu.nickName}</td>
+												<td>${stu.password}</td>
+												<td>${stu.age}</td>
+												<td>${stu.floor}</td>
+												<td>${stu.dorm}</td>
+												<td>${stu.sex}</td>
 												<td>
 													<div class="am-btn-toolbar">
 														<div class="am-btn-group am-btn-group-xs">
 															<button
 																class="am-btn am-btn-default am-btn-xs am-text-secondary">
 																<span class="am-icon-pencil-square-o"></span> <a
-																	href="update?d.dId=${d.dId}">编辑</a>
+																	href="update?stu.id=${stu.id}">编辑</a>
 															</button>
 															<button
 																class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only">
 																<span class="am-icon-trash-o"></span><a
-																	href="delete?d.dId=${d.dId}"> 删除</a>
+																	href="delete?stu.id=${stu.id}"> 删除</a>
 															</button>
 														</div>
 													</div>
@@ -203,7 +188,7 @@
 									</div>
 								</div>
 								<hr />
-								<p>注：.....</p>
+								
 							</form>
 						</div>
 
@@ -228,8 +213,7 @@
 	<!-- navbar -->
 	<a href="admin-offcanvas"
 		class="am-icon-btn am-icon-th-list am-show-sm-only admin-menu"
-		data-am-offcanvas="{target: '#admin-offcanvas'}">
-		<!--<i class="fa fa-bars" aria-hidden="true"></i>-->
+		data-am-offcanvas="{target: '#admin-offcanvas'}"> <!--<i class="fa fa-bars" aria-hidden="true"></i>-->
 	</a>
 
 	<script type="text/javascript"

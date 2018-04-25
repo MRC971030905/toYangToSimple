@@ -1,27 +1,39 @@
 package com.byxy.entity;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+import org.springframework.beans.factory.annotation.Value;
+
 @Entity
-public class Student {
+public class Student implements Serializable {
 	@Id
 	@GeneratedValue
 	private Integer id;
-	@Column(length=10)
-	private String name;//用户名
-	@Column(length=20)
-	private String password;//密码
-	
-	private Integer age ;//年龄
-	
-	private Boolean sex;//性别
-	
-	private String floor;//楼层
-	
-	private String dorm;//宿舍
+	@Column(length = 10)
+	private String name;// 账号
+	@Column(length = 20)
+	private String password;// 密码
+	@Column(length = 5, nullable = false)
+	private Integer age;// 年龄
+	@Column(nullable = false)
+	private Boolean sex;// 性别
+	@Column(nullable = false)
+	private String floor;// 楼层
+	@Column(nullable = false)
+	private String dorm;// 宿舍
+
+	private String nickName;// 昵称
+
+	private String headcount;// 总人数
+
+	private String number;// 已经点击定位人数
+	@Value("false")
+	private Boolean del;// 是否已经删除
 
 	public Integer getId() {
 		return id;
@@ -79,17 +91,44 @@ public class Student {
 		this.dorm = dorm;
 	}
 
-	@Override
-	public String toString() {
-		return "Student [id=" + id + ", name=" + name + ", password=" + password + ", age=" + age + ", sex=" + sex
-				+ ", floor=" + floor + ", dorm=" + dorm + "]";
-	}
-
 	public Student() {
 		super();
 	}
 
-	public Student(Integer id, String name, String password, Integer age, Boolean sex, String floor, String dorm) {
+	public String getNickName() {
+		return nickName;
+	}
+
+	public void setNickName(String nickName) {
+		this.nickName = nickName;
+	}
+
+	public String getHeadcount() {
+		return headcount;
+	}
+
+	public void setHeadcount(String headcount) {
+		this.headcount = headcount;
+	}
+
+	public String getNumber() {
+		return number;
+	}
+
+	public void setNumber(String number) {
+		this.number = number;
+	}
+
+	public Boolean getDel() {
+		return del;
+	}
+
+	public void setDel(Boolean del) {
+		this.del = del;
+	}
+
+	public Student(Integer id, String name, String password, Integer age, Boolean sex, String floor, String dorm,
+			String nickName, String headcount, String number, Boolean del) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -98,7 +137,17 @@ public class Student {
 		this.sex = sex;
 		this.floor = floor;
 		this.dorm = dorm;
+		this.nickName = nickName;
+		this.headcount = headcount;
+		this.number = number;
+		this.del = del;
 	}
-	
-	
+
+	@Override
+	public String toString() {
+		return "Student [id=" + id + ", name=" + name + ", password=" + password + ", age=" + age + ", sex=" + sex
+				+ ", floor=" + floor + ", dorm=" + dorm + ", nickName=" + nickName + ", headcount=" + headcount
+				+ ", number=" + number + ", del=" + del + "]";
+	}
+
 }

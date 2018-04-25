@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-非常抱歉，您的操作有误，请返回重新操作
+<h1>非常抱歉，您的操作有误，请返回重新操作</h1>
 </body>
 </html>

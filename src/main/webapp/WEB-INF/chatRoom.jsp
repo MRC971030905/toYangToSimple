@@ -23,12 +23,13 @@
 	href="${pageContext.request.contextPath}/assets/css/page/form.css" />
 
 <script type="text/javascript">
-	var url = "localhost:8080${pageContext.request.contextPath}";
+	var url = "www.mrcjb.com";
 	var websocket = null;
 	if ('WebSocket' in window) {
-		websocket = new WebSocket("ws://" + url + "/chat.sc");
+		websocket = new WebSocket("wss://" + url + "/chat.sc");
+		console.log(websocket);
 	} else {
-		websocket = new SockJS("http://" + url + "/sockjs/chat.sc");
+		websocket = new SockJS("https://" + url + "/sockjs/chat.sc");
 	}
 	websocket.onopen = onOpen;
 	websocket.onmessage = onMessage;
@@ -64,7 +65,7 @@
 		console.log(event.reason)
 		document.getElementById("plane").innerHTML = document
 				.getElementById("plane").innerHTML
-				+ "CLOSE<br/>";
+				+ "连接失败<br/>";
 	}
 
 	function doSend() {
@@ -74,36 +75,12 @@
 				websocket.send(msg);
 				document.getElementById("message").value = "";
 			}
-			sendFile(msg);
+
 			document.getElementById("message").value = "";
 		} else {
-			alert("connect fail!");
+			alert("连接没成功");
+			alert(websocket.readyState);
 		}
-	}
-
-	function sendFile(isWithText) {
-		var inputElement = document.getElementById("file");
-		var fileList = inputElement.files;
-		var file = fileList[0];
-		if (!file)
-			return;
-		websocket.send(file.name + ":fileStart");
-		var reader = new FileReader();
-		//以二进制形式读取文件
-		reader.readAsArrayBuffer(file);
-		//文件读取完毕后该函数响应
-		reader.onload = function loaded(evt) {
-			var blob = evt.target.result;
-			//发送二进制表示的文件
-			websocket.send(blob);
-			if (isWithText) {
-				websocket.send(file.name + ":fileFinishWithText");
-			} else {
-				websocket.send(file.name + ":fileFinishSingle");
-			}
-			console.log("finnish");
-		}
-		inputElement.outerHTML = inputElement.outerHTML; //清空<input type="file">的值
 	}
 
 	function disconnect() {
@@ -119,9 +96,9 @@
 			websocket = null;
 		}
 		if ('WebSocket' in window) {
-			websocket = new WebSocket("ws://" + url + "/chat.sc");
+			websocket = new WebSocket("wss://" + url + "/chat.sc");
 		} else {
-			websocket = new SockJS("http://" + url + "/sockjs/chat.sc");
+			websocket = new SockJS("https://" + url + "/sockjs/chat.sc");
 		}
 		websocket.onopen = onOpen;
 		websocket.onmessage = onMessage;
@@ -139,6 +116,38 @@
 
 
 	<div class="admin">
+		<div class="admin-sidebar am-offcanvas  am-padding-0"
+			id="admin-offcanvas">
+			<div class="am-offcanvas-bar admin-offcanvas-bar">
+				<!-- User -->
+				<div class="user-box am-hide-sm-only">
+					<div class="user-img">
+						<a href="#"><img src="assets/img/123.png" alt="user-img"
+							class="img-circle img-thumbnail img-responsive"></a>
+						<div class="user-status offline">
+							<i class="am-icon-dot-circle-o" aria-hidden="true"></i>
+						</div>
+					</div>
+					<h5>${name}</h5>
+				</div>
+				<ul class="am-list admin-sidebar-list">
+					<li><a href="sindex"><span class="am-icon-home"></span> 首页</a></li>
+					<li class="admin-parent"><a class="am-cf"
+						data-am-collapse="{target: '#collapse-nav1'}"><span
+							class="am-icon-table"></span> 功能模块 <span
+							class="am-icon-angle-right am-fr am-margin-right"></span></a>
+						<ul class="am-list am-collapse admin-sidebar-sub"
+							id="collapse-nav1">
+							<li><a href="sindex">天气查询</a></li>
+							<li><a href="chatRoom2.jsp">吐槽室</a></li>
+							<li><a href="html/location.html">定位</a></li>
+						</ul></li>
+
+
+				</ul>
+			</div>
+
+		</div>
 		<!-- Start right Content here -->
 		<div class="content-page">
 			<!-- Start content -->
@@ -153,14 +162,15 @@
 								<fieldset>
 									<legend>吐槽室</legend>
 									<div id="plane"></div>
-									<div >
-										<input id="message"  type="text" placeholder="输入内容" minlength="1"
-											maxlength="100" autocomplete="off"></input>
-									</div>
-									
 									<div>
-										<button class="am-btn am-btn-secondary" id="send" onclick="doSend()">发送信息</button>
-										<button class="am-btn am-btn-secondary" id="clean" onclick="clean()">清屏</button>
+										<input id="message" type="text" placeholder="输入内容"
+											minlength="1" maxlength="100"></input>
+									</div>
+									<div>
+										<button class="am-btn am-btn-secondary" id="send"
+											onclick="doSend()">发送信息</button>
+										<button class="am-btn am-btn-secondary" id="clean"
+											onclick="clean()">清屏</button>
 									</div>
 								</fieldset>
 							</div>
@@ -175,6 +185,10 @@
 		<!-- end right Content here -->
 	</div>
 
+	<a href="admin-offcanvas"
+		class="am-icon-btn am-icon-th-list am-show-sm-only admin-menu"
+		data-am-offcanvas="{target: '#admin-offcanvas'}"> <!--<i class="fa fa-bars" aria-hidden="true"></i>-->
+	</a>
 
 
 	<script type="text/javascript"

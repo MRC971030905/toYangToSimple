@@ -18,26 +18,22 @@ public class StudentZCAction extends ActionSupport {
 
 	@Resource
 	private StudentService ms;
-
+	@Resource
+	private MrcUserService mrcs;
 	private Student mu;
 
 	public String studentZC() {
-		if (mu.getName().equals(null) || mu.getName() == "" || mu.getPassword().equals(null)
-				|| mu.getPassword() == "") {// 输入为空
-			ServletActionContext.getRequest().getSession().setAttribute("error", "输入不能为空");
+		if (null == mu.getName() || mu.getName() == "" || null == mu.getPassword() || mu.getPassword() == "") {// 输入为空
 			return "error";
 		} else {
-			Student user = ms.getUser(mu.getName());// 查询数据库
-			if (null == user) {// 判断是否存在这个用户，null代表不存在
-				ms.add(mu);// 增加用户
+			Student user = ms.getUser(mu.getName());// 查询学生数据库
+			MrcUser u = mrcs.getUser(mu.getName());// 查询管理员数据库
+			if (null == user && null == u) {// 判断是否存在这个用户，null代表不存在
+				ms.add(mu);// 增加学生
 				return "success";
 			} else {
-				if (mu.getName().equals(user.getName())) {
-					ServletActionContext.getRequest().getSession().setAttribute("error", "该用户已存在");
-					return "error";
-				} else {
-					return "success";
-				}
+				ServletActionContext.getRequest().getSession().setAttribute("alreadyExist", "该账号已存在，请重新输入");
+				return "error";
 			}
 
 		}

@@ -9,6 +9,7 @@ import org.springframework.web.socket.WebSocketHandler;
 import org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor;
 
 public class HandshakeInterceptor extends HttpSessionHandshakeInterceptor {
+
 	@Override
 	public boolean beforeHandshake(ServerHttpRequest request, ServerHttpResponse response, WebSocketHandler handler,
 			Map<String, Object> attributes) throws Exception {
@@ -24,6 +25,9 @@ public class HandshakeInterceptor extends HttpSessionHandshakeInterceptor {
 
 	public String getName() {
 		String name = (String) ServletActionContext.getRequest().getSession().getAttribute("name");
+		if(name==null) {
+			name="匿名用户";
+		}
 		return name;
 	}
 

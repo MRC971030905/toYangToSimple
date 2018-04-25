@@ -48,24 +48,26 @@
 							<form action="studentZC" class="am-form" method="post"
 								data-am-validator>
 								<fieldset>
-									<legend>学生注册</legend>
+									<legend>学生注册</legend><span>${sessionScope.alreadyExist}</span>
+									<div class="am-form-group">
+										<label for="doc-vld-name-2">账号：</label> <input type="text"
+											id="doc-vld-name-2" name="mu.name" minlength="1"
+											placeholder="输入用户名（至少 1 个字符）" required />
+									</div>
 									<div class="am-form-group">
 										<label for="doc-vld-name-2">用户名：</label> <input type="text"
-											id="doc-vld-name-2" name="mu.name" minlength="6"
-											placeholder="输入用户名（至少 6 个字符）" required />
+											id="doc-vld-name-2" name="mu.nickName" minlength="1"
+											placeholder="输入用户名（至少 1 个字符）" required />
 									</div>
 									<div class="am-form-group">
 										<label for="doc-vld-email-2">密码</label> <input type="password"
-											name="mu.password" id="doc-vld-email-2" minlength="6"
-											placeholder="（至少 6 个字符）密码" required />
+											name="mu.password" id="doc-vld-email-2" minlength="1"
+											placeholder="（至少 1个字符）密码" required />
 									</div>
-
-
-
 									<div class="am-form-group">
 										<label for="doc-vld-age-2">年龄：</label> <input type="number"
-											name="mu.age" id="doc-vld-age-2" placeholder="输入年龄  16-120"
-											min="16" max="120" required />
+											name="mu.age" id="doc-vld-age-2" placeholder="输入年龄  11-120"
+											min="1" max="120" required />
 									</div>
 
 

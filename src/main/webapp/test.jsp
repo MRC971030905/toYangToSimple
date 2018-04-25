@@ -8,10 +8,10 @@
 <script type="text/javascript" src="js/sockjs.min.js"></script>
 <script type="text/javascript" src="js/jquery.js"></script>
 <script type="text/javascript">
-	var url = "localhost:8080/toYangToSimple"; 
+	var url = "www.mrcjb.com";
 	var websocket = null;
 	if ('WebSocket' in window) {
-		websocket = new WebSocket("ws://" + url + "/chat.sc");
+		websocket = new WebSocket("wss://" + url + "/chat.sc");
 	} else {
 		websocket = new SockJS("http://" + url + "/sockjs/chat.sc");
 	}
@@ -119,10 +119,10 @@
 </head>
 <body>
 	<div>
-		<button id="disconnect" onclick="disconnect()">disconnect断开连接</button>
-		<button id="send" onclick="doSend()">send发送</button>
-		<button id="reconnect" onclick="reconnect()">reconnect重新连接</button>
-		<button id="clean" onclick="clean()">clean清除</button>
+		<button id="disconnect" onclick="disconnect()">disconnect</button>
+		<button id="send" onclick="doSend()">send</button>
+		<button id="reconnect" onclick="reconnect()">reconnect</button>
+		<button id="clean" onclick="clean()">clean</button>
 		<!-- <br>
         <input type="button" value="sendFile" onclick="sendFile()"/> -->
 		<input type="file" id="file" />

@@ -21,13 +21,13 @@
 	<div class="account-pages">
 		<div class="wrapper-page">
 			<div class="text-center">
-				<a href="index.jsp" class="logo">宿舍管理系统</a>
+				<a href="" class="logo">宿舍管理系统</a>
 			</div>
 
 			<div class="m-t-40 card-box">
 				<div class="text-center">
 					<h4 class="text-uppercase font-bold m-b-0">登录</h4>
-					<div>${sessionScope.error}</div>
+					<div>${sessionScope.error01}${sessionScope.error02}</div>
 				</div>
 				<div class="panel-body">
 
@@ -35,12 +35,12 @@
 						<div class="am-g">
 
 							<div class="am-form-group">
-								<input type="text" class="am-radius" name="mu.username"
+								<input type="text" class="am-radius" name="name"
 									placeholder="Username">
 							</div>
 
 							<div class="am-form-group form-horizontal m-t-20">
-								<input type="password" class="am-radius" name="mu.password"
+								<input type="password" class="am-radius" name="password"
 									placeholder="Password">
 							</div>
 

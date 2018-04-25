@@ -5,16 +5,16 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-@Retention(RetentionPolicy.RUNTIME) // ×¢½â»áÔÚclassÖĞ´æÔÚ£¬ÔËĞĞÊ±¿ÉÍ¨¹ı·´Éä»ñÈ¡
-@Target(ElementType.METHOD) // Ä¿±êÊÇ·½·¨
+@Retention(RetentionPolicy.RUNTIME) // æ³¨è§£ä¼šåœ¨classä¸­å­˜åœ¨ï¼Œè¿è¡Œæ—¶å¯é€šè¿‡åå°„è·å–
+@Target(ElementType.METHOD) // ç›®æ ‡æ˜¯æ–¹æ³•
 public @interface LogAnn {
 	/**
-	 * Ä£¿éÃû×Ö
+	 * æ¨¡å—åå­—
 	 */
 	String module() default "";
 
 	/**
-	 * ²Ù×÷ÀàĞÍ
+	 * æ“ä½œç±»å‹
 	 */
 	String methods() default "";
 }

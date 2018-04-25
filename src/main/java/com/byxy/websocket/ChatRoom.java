@@ -27,33 +27,35 @@ public class ChatRoom extends AbstractWebSocketHandler {
 	FileOutputStream output;
 
 	@Override
+	//建立连接
 	public void afterConnectionEstablished(WebSocketSession webSocketSession) throws Exception {
-		System.out.println("Connection established..." + webSocketSession.getRemoteAddress());
-		System.out.println(webSocketSession.getAttributes().get("user") + " Login");
-		webSocketSession.sendMessage(new TextMessage("I'm " + (webSocketSession.getAttributes().get("user"))));
+		System.out.println("建立连接Connection established..." + webSocketSession.getRemoteAddress());
+		System.out.println("用户： "+webSocketSession.getAttributes().get("user") + " Login");
+		webSocketSession.sendMessage(new TextMessage("我是：" + (webSocketSession.getAttributes().get("user"))));
 		sessionList.add(webSocketSession);
 	}
 
 	@Override
+	//连接关闭后
 	public void afterConnectionClosed(WebSocketSession webSocketSession, CloseStatus status) throws Exception {
-		System.out.println("Connection closed..." + webSocketSession.getRemoteAddress() + " " + status);
-		System.out.println(webSocketSession.getAttributes().get("user") + " Logout");
+		System.out.println("连接关闭后Connection closed..." + webSocketSession.getRemoteAddress() + " " + status);
+		System.out.println("用户： "+webSocketSession.getAttributes().get("user") + " Logout退出");
 		sessionList.remove(webSocketSession);
 	}
-
+	//处理信息
 	@Override
 	public void handleTextMessage(WebSocketSession websocketsession, TextMessage message) {
 		String payload = message.getPayload();
 		String textString;
 		try {
 			if (payload.endsWith(":fileStart")) {
-				output = new FileOutputStream(new File("D:\\websocket\\" + payload.split(":")[0]));
+				output = new FileOutputStream(new File("C:\\websocket\\" + payload.split(":")[0]));
 			} else if (payload.endsWith(":fileFinishSingle")) {
 				output.close();
 				String fileName = payload.split(":")[0];
 				for (WebSocketSession session : sessionList) {
 					if (session.getId().equals(websocketsession.getId())) {
-						textString = " I (" + format.format(new Date()) + ")<br>";
+						textString = " 我  (" + format.format(new Date()) + ")<br>";
 					} else {
 						textString = websocketsession.getAttributes().get("user") + " (" + format.format(new Date())
 								+ ")<br>";
@@ -71,7 +73,7 @@ public class ChatRoom extends AbstractWebSocketHandler {
 			} else {
 				for (WebSocketSession session : sessionList) {
 					if (session.getId().equals(websocketsession.getId())) {
-						textString = " I (" + format.format(new Date()) + ")<br>" + payload;
+						textString = " 我 (" + format.format(new Date()) + ")<br>" + payload;
 					} else {
 						textString = websocketsession.getAttributes().get("user") + " (" + format.format(new Date())
 								+ ")<br>" + payload;
@@ -112,7 +114,7 @@ public class ChatRoom extends AbstractWebSocketHandler {
 	public void sendPicture(WebSocketSession session, String fileName) {
 		FileInputStream input;
 		try {
-			File file = new File("D:\\websocket\\" + fileName);
+			File file = new File("C:\\websocket\\" + fileName);
 			input = new FileInputStream(file);
 			byte bytes[] = new byte[(int) file.length()];
 			input.read(bytes);

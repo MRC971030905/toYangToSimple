@@ -13,6 +13,31 @@
 <link rel="stylesheet" href="assets/css/page/typography.css" />
 <link rel="stylesheet" href="assets/css/page/form.css" />
 <link rel="stylesheet" href="assets/css/component.css" />
+<style>
+.pacong {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.pacong li {
+	display: flex;
+	margin-left: 10px;
+}
+
+.tit {
+	font-size: 14px;
+	font-weight: 700;
+	height: 40px;
+	margin-top: 5%;
+	width: 300px;
+}
+
+.time {
+	font-size: 17px;
+	margin: 2% 0;
+	color: #8e8e8e;
+}
+</style>
 </head>
 
 <body>
@@ -35,7 +60,8 @@
 							<i class="am-icon-dot-circle-o" aria-hidden="true"></i>
 						</div>
 					</div>
-					<h5>${mu.username }</h5>
+
+					<h5>${name}</h5>
 				</div>
 				<ul class="am-list admin-sidebar-list">
 					<li><a href="sindex"><span class="am-icon-home"></span> 首页</a></li>
@@ -46,11 +72,11 @@
 						<ul class="am-list am-collapse admin-sidebar-sub"
 							id="collapse-nav1">
 							<li><a href="sindex">天气查询</a></li>
-							<li><a href="chatRoom2.jsp">吐槽室</a></li>
+							<li><a href="chatRoom">吐槽室</a></li>
 							<li><a href="html/location.html">定位</a></li>
 						</ul></li>
-					
-					
+
+
 				</ul>
 			</div>
 
@@ -86,7 +112,7 @@
 							<div class="widget-box-2">
 								<div class="widget-detail-2">
 									<a class="badge  pull-left m-t-20  am-round"
-										style="color: #fff; background: #0e90d2;" href="chatRoom2.jsp">进入吐槽室</a>
+										style="color: #fff; background: #0e90d2;" href="chatRoom">进入吐槽室</a>
 
 								</div>
 							</div>
@@ -103,68 +129,37 @@
 							</div>
 						</div>
 					</div>
-					<!-- col end -->
 					<div class="am-u-md-3">
-
-
 						<div class="card-box">
-							<h4 class="header-title m-t-0 m-b-30">总人数</h4>
+							<h4 class="header-title m-t-0 m-b-30">操作日志</h4>
 							<div class="widget-chart-1 am-cf">
-								<div id="widget-chart-box-1"
-									style="height: 110px; width: 110px; float: left;"></div>
-
-								<div class="widget-detail-1" style="float: right;">
-									<h2 class="p-t-10 m-b-0">2500</h2>
-									<p class="text-muted">今日操作数据：100 条</p>
-								</div>
+								<span id="user"></span> <span id="time"></span> <span
+									id="content"></span>
 							</div>
 						</div>
+
 					</div>
+					<!-- col end -->
+					<div class="am-u-md-3"></div>
 					<!-- Row end -->
 				</div>
 
 				<div class="am-g">
 					<!-- Row start -->
-					<div class="am-u-md-4">
-						<div class="card-box">
-							<h4 class="header-title m-t-0">环形图</h4>
-							<div id="index-pie-1" style="height: 345px; height: 300px;"></div>
-						</div>
-					</div>
 
-					<div class="am-u-md-4">
-						<div class="card-box">
-							<h4 class="header-title m-t-0">一周的温度</h4>
-							<div id="index-bar-1" style="height: 345px; height: 300px;"></div>
-						</div>
-					</div>
-
-					<div class="am-u-md-4">
-						<div class="card-box">
-							<h4 class="header-title m-t-0">今日温度</h4>
-							<div id="index-line-1" style="height: 345px; height: 300px;"></div>
-						</div>
+					<div class="card-box">
+						<h4 class="header-title m-t-0">校园最新信息</h4>
+						<hr />
+						<ul class="pacong">${ht}
+						</ul>
 					</div>
 					<!-- Row end -->
 				</div>
-
-
-
-
-
-
 			</div>
-
-
-
-
-
 		</div>
 	</div>
 	<!-- end right Content here -->
 	<!--</div>-->
-	</div>
-	</div>
 
 	<!-- navbar -->
 	<a href="admin-offcanvas"
@@ -187,6 +182,11 @@
 				console.log(city);
 			}
 		});
+		$(function() {
+			document.getElementById("time").innerHTML = "${log.beginDate}";
+			document.getElementById("user").innerHTML = "用户：${name} 在";
+			document.getElementById("content").innerHTML = "访问了：${log.name}";
+		})
 	</script>
 	<script type="text/javascript" src="assets/js/amazeui.min.js"></script>
 	<script type="text/javascript" src="assets/js/app.js"></script>
