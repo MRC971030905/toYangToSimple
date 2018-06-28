@@ -1,6 +1,7 @@
 package com.byxy.aop;
 
 import java.lang.reflect.Method;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.annotation.Resource;
@@ -16,7 +17,6 @@ import org.springframework.stereotype.Component;
 
 import com.byxy.entity.Log;
 import com.byxy.service.LogService;
-import com.opensymphony.xwork2.ActionContext;
 
 @Aspect // 1 声明切面
 @Component // 2.注册为Bean
@@ -59,9 +59,12 @@ public class LogAop {
 		Object object = pjp.proceed();
 		long end = System.currentTimeMillis();
 		log.setName(name);
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
 		log.setBeginDate(new Date());
 		log.setNtime(end - start);
+		String time=df.format(log.getBeginDate());
 		ServletActionContext.getRequest().getSession().setAttribute("log",log);
+		ServletActionContext.getRequest().getSession().setAttribute("time",time);
 		logService.add(log);
 		return object;
 	}

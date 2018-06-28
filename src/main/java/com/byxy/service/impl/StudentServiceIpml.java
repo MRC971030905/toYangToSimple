@@ -34,7 +34,7 @@ public class StudentServiceIpml implements StudentService {
 	@Override
 	public void delete(Student stu) {
 		std.delete(stu);
-		
+
 	}
 
 	@Override

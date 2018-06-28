@@ -11,12 +11,13 @@ import com.byxy.entity.Log;
 import com.byxy.service.LogService;
 
 @Service
-public class LogServiceIpml  implements LogService{
+public class LogServiceIpml implements LogService {
 	@Resource
 	private LogDao logDao;
+
 	@Override
 	public List<Log> find(int curPage, int pageCount) {
-		
+
 		return logDao.find(curPage, pageCount);
 	}
 
@@ -31,9 +32,8 @@ public class LogServiceIpml  implements LogService{
 	}
 
 	@Override
-	public void add(Log l) {
-		logDao.add(l);
-		
+	public void add(Log log) {
+		logDao.add(log);
 	}
 
 }

@@ -23,25 +23,25 @@
 	href="${pageContext.request.contextPath}/assets/css/page/form.css" />
 
 <script type="text/javascript">
-	var url = "www.mrcjb.com";
+	var url = "localhost:8080/toYangToSimple";
 	var websocket = null;
 	if ('WebSocket' in window) {
-		websocket = new WebSocket("wss://" + url + "/chat.sc");
+		websocket = new WebSocket("ws://" + url + "/chat.sc");
 		console.log(websocket);
 	} else {
-		websocket = new SockJS("https://" + url + "/sockjs/chat.sc");
+		websocket = new SockJS("http://" + url + "/sockjs/chat.sc");
 	}
 	websocket.onopen = onOpen;
 	websocket.onmessage = onMessage;
 	websocket.onerror = onError;
 	websocket.onclose = onClose;
+	
 
 	function onOpen(openEvent) {
 		document.getElementById("plane").innerHTML = document
-				.getElementById("plane").innerHTML
-				+ "连接成功<br/>";
+					.getElementById("plane").innerHTML
+				+ "连接成功<br/>";			
 	}
-
 	function onMessage(event) {
 		if (typeof event.data == 'string') {
 			var element = document.createElement("p");
@@ -139,7 +139,7 @@
 						<ul class="am-list am-collapse admin-sidebar-sub"
 							id="collapse-nav1">
 							<li><a href="sindex">天气查询</a></li>
-							<li><a href="chatRoom2.jsp">吐槽室</a></li>
+							<li><a href="chatRoom2">吐槽室</a></li>
 							<li><a href="html/location.html">定位</a></li>
 						</ul></li>
 
@@ -157,10 +157,8 @@
 					<div class="am-u-sm-12">
 						<div class="card-box">
 							<div class="am-form" data-am-validator>
-
-
 								<fieldset>
-									<legend>吐槽室</legend>
+									<legend>吐槽室 <span>${i}</span></legend>
 									<div id="plane"></div>
 									<div>
 										<input id="message" type="text" placeholder="输入内容"

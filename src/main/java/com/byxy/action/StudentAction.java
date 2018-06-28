@@ -11,7 +11,12 @@ import com.byxy.entity.Student;
 import com.byxy.service.StudentService;
 import com.opensymphony.xwork2.ActionSupport;
 
-
+/**
+ * 学生Action
+ * 
+ * @author Mrc
+ *
+ */
 public class StudentAction extends ActionSupport {
 	@Resource
 	private StudentService studentService;
@@ -22,12 +27,19 @@ public class StudentAction extends ActionSupport {
 
 	private int count;
 
+	/**
+	 * 查询学生信息
+	 */
 	public String list() {
 		list = studentService.find();
 		count = (int) studentService.count();
+		System.out.println("find is ok");
 		return "success";
 	}
 
+	/**
+	 * 修改学生信息
+	 */
 	public String update() {
 		HttpServletRequest request = ServletActionContext.getRequest();
 		String method = request.getMethod();
@@ -37,16 +49,18 @@ public class StudentAction extends ActionSupport {
 			return "success";
 		} else {
 			stu = studentService.get(stu.getId());
-			System.out.println(stu);
 			System.out.println("get is ok");
 			return "error";
 		}
 	}
 
+	/**
+	 * 增加学生信息
+	 */
 	public String add() {
 		HttpServletRequest request = ServletActionContext.getRequest();
 		String method = request.getMethod();
-		System.out.println("method="+method);
+		System.out.println("method=" + method);
 		if ("post".equalsIgnoreCase(method)) {
 			studentService.add(stu);
 			return "success";
@@ -56,8 +70,10 @@ public class StudentAction extends ActionSupport {
 
 	}
 
+	/**
+	 * 删除学生信息
+	 */
 	public String dele() {
-		System.out.println(stu);
 		studentService.delete(stu);
 		System.out.println("deleted");
 		return "success";

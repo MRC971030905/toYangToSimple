@@ -24,7 +24,6 @@ public class Crawler {
 	/**
 	 * 获取网页源代码
 	 * 
-	 * @return
 	 */
 	public static String htmlSource(String encoding) {
 		String newHtml = null;

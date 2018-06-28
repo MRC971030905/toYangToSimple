@@ -9,16 +9,20 @@ import javax.persistence.Id;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.opensymphony.xwork2.validator.annotations.DateRangeFieldValidator;
+
 @Entity
 public class Log  implements Serializable{
 	@Id
 	@GeneratedValue
 	private Integer id;
 	@Temporal(TemporalType.TIMESTAMP)
-	private Date beginDate;
-	private Long ntime;
-	private String name;
-	private String model;
+	private Date beginDate;//开始时间
+	private Long ntime;//时间
+	private String name;//用户名
+	private String model;//方法明
 	public Integer getId() {
 		return id;
 	}

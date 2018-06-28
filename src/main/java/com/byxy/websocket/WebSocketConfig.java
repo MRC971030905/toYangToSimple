@@ -30,4 +30,5 @@ public class WebSocketConfig implements WebSocketConfigurer {
 	public ChatRoom chatRoom() {
 		return new ChatRoom();
 	}
+
 }

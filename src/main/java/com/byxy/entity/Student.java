@@ -29,9 +29,7 @@ public class Student implements Serializable {
 
 	private String nickName;// 昵称
 
-	private String headcount;// 总人数
 
-	private String number;// 已经点击定位人数
 	@Value("false")
 	private Boolean del;// 是否已经删除
 
@@ -103,21 +101,7 @@ public class Student implements Serializable {
 		this.nickName = nickName;
 	}
 
-	public String getHeadcount() {
-		return headcount;
-	}
 
-	public void setHeadcount(String headcount) {
-		this.headcount = headcount;
-	}
-
-	public String getNumber() {
-		return number;
-	}
-
-	public void setNumber(String number) {
-		this.number = number;
-	}
 
 	public Boolean getDel() {
 		return del;
@@ -128,7 +112,7 @@ public class Student implements Serializable {
 	}
 
 	public Student(Integer id, String name, String password, Integer age, Boolean sex, String floor, String dorm,
-			String nickName, String headcount, String number, Boolean del) {
+			String nickName, Boolean del) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -138,16 +122,16 @@ public class Student implements Serializable {
 		this.floor = floor;
 		this.dorm = dorm;
 		this.nickName = nickName;
-		this.headcount = headcount;
-		this.number = number;
 		this.del = del;
 	}
 
 	@Override
 	public String toString() {
 		return "Student [id=" + id + ", name=" + name + ", password=" + password + ", age=" + age + ", sex=" + sex
-				+ ", floor=" + floor + ", dorm=" + dorm + ", nickName=" + nickName + ", headcount=" + headcount
-				+ ", number=" + number + ", del=" + del + "]";
+				+ ", floor=" + floor + ", dorm=" + dorm + ", nickName=" + nickName + ", del=" + del + "]";
 	}
+
+	
+	
 
 }
